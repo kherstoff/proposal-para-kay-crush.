@@ -1,0 +1,145 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <title>Proposal para kay Crush</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Hi Crush!</h1>
+        <p>Do you like me?</p>
+        <div class="buttons">
+            <div class="yes-container">
+                <button id="yesBtn">Yes</button>
+                <img id="hand" class="hidden" src="https://c.tenor.com/8F8nkpVvAPwAAAAC/pointing-hand.gif" alt="Pointing Hand">
+            </div>
+            <button id="noBtn">No</button>
+        </div>
+        <div class="extra-buttons"></div>
+        <div id="sadImages" class="hidden"></div>
+        <div class="credit">
+            <p>Created by Dade K</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html><style>body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e0f7fa; /* Light cyan */
+    text-align: center;
+    padding: 50px;
+}
+
+.container {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    margin: auto;
+}
+
+h1 {
+    color: #00796b; /* Teal */
+}
+
+.buttons {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background-color: #00796b; /* Teal */
+    color: white;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: #004d40; /* Darker teal */
+}
+
+.yes-container {
+    position: relative;
+    display: inline-block;
+}
+
+#arrow {
+    position: absolute;
+    top: -10px; /* Adjust position as needed */
+    left: 100%;
+    width: 30px; /* Adjust arrow size */
+}
+
+.sad-image {
+    max-width: 100px; /* Limit size */
+    height: auto;
+    margin: 10px;
+}
+
+.extra-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap; /* Allow wrapping of buttons */
+}
+
+.hidden {
+    display: none;
+}
+
+.credit {
+    margin-top: 40px;
+    font-size: 14px;
+    color: #555;
+}</style><script>let noClickCount = 0;
+
+document.getElementById('yesBtn').onclick = () => {
+    window.location.href = "https://valhndsm.github.io/proposal/yes.html"; // Change this to your music link
+};
+
+document.getElementById('noBtn').onclick = () => {
+    noClickCount++;
+
+    const sadImages = [
+        "https://c.tenor.com/6CujUsC1CIkAAAAM/crying-black-guy-meme50fps-interpolated-interpolated.gif", // Sad Boi
+        "https://c.tenor.com/36JFV8pDtXIAAAAd/sad-your-friends-are-togheter.gif", // Sad Wolf
+        "https://c.tenor.com/dpUQLSpLPzkAAAAd/sad-man-tik-tok-meme.gif" // Sad Man
+    ];
+
+    // Move the No button
+    const noBtn = document.getElementById('noBtn');
+    noBtn.style.transform = `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`;
+
+    // Create a new image element each time "No" is clicked
+    const newImage = document.createElement('img');
+    newImage.src = sadImages[noClickCount % sadImages.length];
+    newImage.alt = "Sad reaction";
+    newImage.classList.add('sad-image');
+
+    // Show the sad images container and append the new image
+    const sadImagesContainer = document.getElementById('sadImages');
+    sadImagesContainer.classList.remove('hidden');
+    sadImagesContainer.appendChild(newImage);
+
+    // Show the hand after 3 clicks
+    if (noClickCount === 3) {
+        document.getElementById('hand').classList.remove('hidden');
+    }
+
+    // Multiply the No buttons
+    if (noClickCount > 3) {
+        const newNoBtn = document.createElement('button');
+        newNoBtn.innerText = "No";
+        newNoBtn.onclick = document.getElementById('noBtn').onclick; // Reuse the same click event
+        document.querySelector('.extra-buttons').appendChild(newNoBtn);
+    }
+};</script>
